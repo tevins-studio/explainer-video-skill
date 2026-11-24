@@ -1,0 +1,7 @@
+{
+ "knock": [0.5, "stone knock: flint struck on flint"],
+ "whoosh": [0.6, "soft whoosh for a wipe transition"],
+ "crackle": [3.0, "campfire crackle"],
+ "pop": [0.4, "soft pop: a berry dropped in a basket"],
+ "step": [0.3, "soft footstep on grass"]
+}

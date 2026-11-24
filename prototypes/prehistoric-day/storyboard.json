@@ -1,0 +1,57 @@
+{
+ "gap_s": 0.6,
+ "voices": {
+  "guide": {
+   "voice_id": "mb-us2"
+  }
+ },
+ "beats": [
+  {
+   "id": "b01",
+   "speaker": "guide",
+   "line": "Welcome to the Stone Age! Eleven thousand years ago, the ice is melting, and the world is wild.",
+   "scene": "Wide prehistoric valley: mountains with snow caps, hills, trees, a far-off mammoth, birds. The monkey guide walks in from the left, stops centre and waves.",
+   "shot": "wide",
+   "camera": "slow pan right, then gentle push in as he stops",
+   "voice_key": "713fd838a5ef",
+   "voice_file": "assets/voice-norm/b01.wav",
+   "voice_s": 5.807,
+   "frames": 175,
+   "gain_db": -4.7,
+   "start_frame": 0,
+   "start_s": 0.0
+  },
+  {
+   "id": "b02",
+   "speaker": "guide",
+   "line": "By day, people gather berries and roots. Then they strike stone on stone, and chip off a sharp blade!",
+   "scene": "Camp edge in daylight. A woman picks red berries into a basket; a man kneels and knaps flint, flakes fly. The guide copies the strike with his own stone, then holds up a blade.",
+   "shot": "medium",
+   "camera": "pan from the gatherer to the toolmaker, push in on the strike",
+   "voice_key": "dd761f56d100",
+   "voice_file": "assets/voice-norm/b02.wav",
+   "voice_s": 6.573,
+   "frames": 198,
+   "gain_db": -6.1,
+   "start_frame": 193,
+   "start_s": 6.433
+  },
+  {
+   "id": "b03",
+   "speaker": "guide",
+   "line": "At night, the family gathers by the fire, to cook, share stories, and stay warm and safe.",
+   "scene": "Night, stars, a moon. Four people sit around a crackling campfire; one roasts food on a stick, one tells a story with big gestures, a child leans in. The guide sits on a log at the right and points to the fire.",
+   "shot": "medium wide",
+   "camera": "slow push in towards the fire",
+   "voice_key": "ce840ef1fcd9",
+   "voice_file": "assets/voice-norm/b03.wav",
+   "voice_s": 5.766,
+   "frames": 173,
+   "gain_db": -3.7,
+   "start_frame": 409,
+   "start_s": 13.633
+  }
+ ],
+ "total_s": 20.0,
+ "voice_model": "espeak-ng"
+}
