@@ -14,7 +14,7 @@ export const StickMonkeySheet: React.FC = () => {
   const tail = 6 * Math.sin(f * 0.1);
   const moods: Mood[] = ["neutral", "smile", "talk", "surprised", "cheeky", "worried", "sour", "pain", "laugh", "focused"];
   return (
-    <SheetBg title="Monkey presenter — stickman version" sub="Brown round head · cream face and muzzle · ears · tuft · blue shirt · red tie · dark trousers · thin stick limbs · curling tail">
+    <SheetBg title="Monkey presenter — stickman version" sub="Black and white · round monkey head · ears · muzzle · tuft · shirt and tie shapes · dark trousers · thin stick limbs · curling tail">
       <KeylineDefs />
       <Stickman d={M} x={250} y={700} scale={1.55} pose={WAVE} mood="smile" turn={0.2} tail={tail} />
       <Label x={250} y={750} t="presenter" />
@@ -79,7 +79,7 @@ export const StickSampleScene: React.FC = () => {
 
 /** The rest of the stick cast at true scale, for reference next to the scene. */
 export const StickCastSheet: React.FC = () => (
-  <SheetBg title="Stick cast — same rig, colour only on clothing and key details" sub="Ama · Tuk · Oru · Nana, next to the presenter">
+  <SheetBg title="Stick cast — black and white, same rig" sub="Ama · Tuk · Oru · Nana, next to the presenter">
     {[
       { d: M, x: 260, p: POINT, m: "cheeky" as Mood },
       { d: AMA_STICK, x: 600, p: tweak(STAND, { ra: [60, 40] }), m: "smile" as Mood },

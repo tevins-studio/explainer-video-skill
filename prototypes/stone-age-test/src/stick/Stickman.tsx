@@ -191,7 +191,8 @@ export const Stickman: React.FC<Props> = ({
     <g transform={`translate(${x} ${y}) scale(${face * scale} ${scale})`}>
       <ellipse cx={0} cy={0} rx={(seat ? 54 : 36) * S} ry={6 * S} fill={INK} opacity={0.16} />
       <g transform={`translate(0 ${-reach})`}>
-        {monkey && <Tube d={tailD} w={5} c={d.head} />}
+        {/* the tail is a stick like the limbs, slightly thinner */}
+        {monkey && <path d={tailD} {...stick} strokeWidth={LINE * 0.8} />}
         <g transform={`rotate(${pose.lean})`}>
           {holdBehind?.(hd)}
           {arm(shF, eF, hF, "af")}
@@ -204,7 +205,7 @@ export const Stickman: React.FC<Props> = ({
           {d.tie && (
             <>
               <path d={`M ${-9 * S} ${-T + 1} L 0 ${-T + 11 * S} L ${-3 * S} ${-T + 15 * S} L ${-12 * S} ${-T + 6 * S} Z M ${9 * S} ${-T + 1} L 0 ${-T + 11 * S} L ${3 * S} ${-T + 15 * S} L ${12 * S} ${-T + 6 * S} Z`}
-                fill="#fffaf0" stroke={INK} strokeWidth={2.2} strokeLinejoin="round" />
+                fill="#ffffff" stroke={INK} strokeWidth={2.2} strokeLinejoin="round" />
               <path d={`M ${-3.5 * S} ${-T + 10 * S} L ${3.5 * S} ${-T + 10 * S} L ${2.5 * S} ${-T + 16 * S} L ${5 * S} ${-T + 50 * S} L 0 ${-T + 57 * S} L ${-5 * S} ${-T + 50 * S} L ${-2.5 * S} ${-T + 16 * S} Z`}
                 fill={d.tie} stroke={INK} strokeWidth={2.2} strokeLinejoin="round" />
             </>
@@ -238,7 +239,7 @@ export const Stickman: React.FC<Props> = ({
                 <circle cx={3} cy={R * 0.17} r={1.9} fill={INK} />
               </g>
             )}
-            {monkey && <path d={`M ${-R * 0.18} ${-R * 0.94} Q ${-R * 0.24} ${-R * 1.3} ${-R * 0.02} ${-R * 1.1} Q ${R * 0.04} ${-R * 1.36} ${R * 0.18} ${-R * 1.06} Q ${R * 0.36} ${-R * 1.2} ${R * 0.24} ${-R * 0.92} Z`} fill="#4b2e17" {...ol} strokeWidth={2.6} />}
+            {monkey && <path d={`M ${-R * 0.18} ${-R * 0.94} Q ${-R * 0.24} ${-R * 1.3} ${-R * 0.02} ${-R * 1.1} Q ${R * 0.04} ${-R * 1.36} ${R * 0.18} ${-R * 1.06} Q ${R * 0.36} ${-R * 1.2} ${R * 0.24} ${-R * 0.92} Z`} fill={INK} {...ol} strokeWidth={2.6} />}
             {d.hair?.(R)}
             <g transform={`translate(${ht} 0)`}>
               <Face mood={mood} talk={talk} blink={blink} look={look} R={R} monkey={monkey} />

@@ -1,4 +1,4 @@
-<!-- router: Stone Age style test (5 scenes) — status: stickman redesign + sample scene + voice shortlist sent for approval 2026-11-25, no test video yet -->
+<!-- router: Stone Age style test (5 scenes) — status: black-and-white stickmen sent for approval 2026-11-25; voice Edge Ryan; no test video yet -->
 # stone-age-test — Stone Age style test: 5 scenes, full-colour cartoon, monkey presenter
 
 ## What it is
@@ -18,6 +18,9 @@ Ice Age valley, gathering berries, stone tools, campfire.
 
 ## Status
 
+- 2026-11-25: characters made strictly black and white (monkey and cast); backgrounds unchanged.
+  Updated monkey sheet and sample scene sent (`work/review-v3/`). Voice chosen: Edge Ryan.
+  Next, after approval: the 30 s test at 1080p.
 - 2026-11-25: the full-cartoon characters were rejected (too childish). Rebuilt every character
   as a polished stickman (`src/stick/`), backgrounds kept. Sent: the stickman monkey sheet, one
   sample scene (berries), the stick cast and ten voice samples (Edge TTS and Kokoro, British).
@@ -65,6 +68,10 @@ Deviations: none. No `public/characters/` images: every character is drawn in co
 
 ## Decisions
 
+- 2026-11-25: all characters strictly black and white: black outlines, limbs and features, white
+  faces and bodies, no colour on any character (the monkey keeps his shapes: ears, muzzle, tuft,
+  shirt and tie, black trousers, tail). Colourful backgrounds stay as a separate element. Voice
+  for the test: Edge TTS en-GB-RyanNeural. Test video at 1080p after approval. No paid costs.
 - 2026-11-25: characters are polished stickmen (round heads, small faces, thin black limbs,
   colour only on clothing and key details); the cartoon rig in `src/toon/Figure.tsx` is retired
   for characters. Backgrounds stay full-colour and layered. A light keyline keeps the figures
