@@ -178,6 +178,11 @@ export const MeadowSet: React.FC<{ f: number; cam?: Cam; mid?: React.ReactNode; 
     </Layer>
     <Layer cam={cam} depth={0.25}>
       <Hill d="M -1200 600 Q -400 470 300 560 Q 800 450 1300 540 Q 1800 470 3000 560 L 3000 1400 L -1200 1400 Z" fill="#a9cba0" line="#8fb489" w={4} />
+      {/* a far forest band, cool and soft */}
+      {Array.from({ length: 26 }, (_, i) => (
+        <circle key={i} cx={-300 + i * 110} cy={600 + 14 * Math.sin(i * 1.7)} r={56 + 12 * rnd(i + 70)} fill="#8fb48d" />
+      ))}
+      <rect x={-1200} y={610} width={4320} height={60} fill="#8fb48d" />
     </Layer>
     <Layer cam={cam} depth={0.45}>
       <Hill d="M -1200 660 Q -200 600 700 640 Q 1400 600 3000 650 L 3000 1400 L -1200 1400 Z" fill="#94bd6a" line="#6f9a4b" w={4} />
@@ -193,6 +198,28 @@ export const MeadowSet: React.FC<{ f: number; cam?: Cam; mid?: React.ReactNode; 
     <Layer cam={cam} depth={1}>
       <path d="M -1200 880 Q 600 850 1300 880 Q 2000 870 3000 880 L 3000 1400 L -1200 1400 Z" fill="#a9cd6b" stroke="#8fb85a" strokeWidth={4} />
       <BerryBush x={420} y={900} s={1.15} picked={picked} rustle={0} />
+      {Array.from({ length: 40 }, (_, i) => {
+        const x = -150 + rnd(i + 200) * 2200;
+        const y = 900 + rnd(i + 300) * 170;
+        return <path key={`g${i}`} d={`M ${x} ${y} q 3 -12 -2 -20 M ${x + 8} ${y} q 1 -9 6 -15`} stroke="#86b356" strokeWidth={4} fill="none" strokeLinecap="round" />;
+      })}
+      <g transform="translate(1500 960)">
+        <path d="M -120 0 L 120 -14 L 124 24 L -116 36 Z" fill={NATURE.bark} {...st()} />
+        <ellipse cx={122} cy={5} rx={14} ry={19} fill="#c99a63" {...st(3.5)} />
+        <path d="M -80 8 l 60 -4 M -20 20 l 70 -5" stroke={NATURE.barkShade} strokeWidth={4} strokeLinecap="round" />
+      </g>
+      {[0, 1].map((i) => {
+        const bx = 400 + i * 900 + 120 * Math.sin(f * 0.03 + i * 2);
+        const by = 760 + 40 * Math.sin(f * 0.07 + i);
+        const w = Math.abs(Math.sin(f * 0.5 + i));
+        return (
+          <g key={`bf${i}`} transform={`translate(${bx} ${by})`}>
+            <ellipse cx={-7} cy={0} rx={8 * w + 1} ry={7} fill={i ? "#f4d35e" : "#f29e4c"} stroke={INK} strokeWidth={2} />
+            <ellipse cx={7} cy={0} rx={8 * w + 1} ry={7} fill={i ? "#f4d35e" : "#f29e4c"} stroke={INK} strokeWidth={2} />
+            <path d="M 0 -6 L 0 6" stroke={INK} strokeWidth={3} strokeLinecap="round" />
+          </g>
+        );
+      })}
       {Array.from({ length: 14 }, (_, i) => <Flower key={i} x={-80 + rnd(i + 5) * 2100} y={930 + rnd(i + 30) * 120} c={i % 3 ? "#f4d35e" : "#f6f0ea"} s={0.9} />)}
       {[[700, 960], [1150, 980], [1650, 950]].map(([x, y], i) => <Tuft key={i} x={x} y={y} s={1.3} />)}
     </Layer>

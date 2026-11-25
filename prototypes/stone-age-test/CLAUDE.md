@@ -1,4 +1,4 @@
-<!-- router: Stone Age style test (5 scenes) — status: design sheets and style frames sent for approval 2026-11-24, no test video yet -->
+<!-- router: Stone Age style test (5 scenes) — status: stickman redesign + sample scene + voice shortlist sent for approval 2026-11-25, no test video yet -->
 # stone-age-test — Stone Age style test: 5 scenes, full-colour cartoon, monkey presenter
 
 ## What it is
@@ -18,6 +18,10 @@ Ice Age valley, gathering berries, stone tools, campfire.
 
 ## Status
 
+- 2026-11-25: the full-cartoon characters were rejected (too childish). Rebuilt every character
+  as a polished stickman (`src/stick/`), backgrounds kept. Sent: the stickman monkey sheet, one
+  sample scene (berries), the stick cast and ten voice samples (Edge TTS and Kokoro, British).
+  Waiting on approval; no test video until then.
 - 2026-11-24: rig, cast, scenery kit and five sets built. Design sheets, five style frames and a
   3 s motion clip sent for approval. Piper voice samples sent. Waiting on approval before the
   storyboard, voices and the test render.
@@ -34,8 +38,9 @@ npx remotion render src/index.ts SheetMonkey work/review/5-monkey-motion.mp4
 
 Add `--browser-executable=<local chrome-headless-shell>` if Remotion cannot download its Chrome.
 
-Piper voices live outside the project, in `~/.cache/piper/` (`pip install piper-tts`; models
-from huggingface.co/rhasspy/piper-voices).
+Voices: Edge TTS (`pip install edge-tts`; host speech.platform.bing.com; pass the HTTPS proxy to
+`Communicate(proxy=...)` behind a proxy) and Kokoro (`pip install kokoro-onnx`; model and voices
+from huggingface.co/onnx-community/Kokoro-82M-v1.0-ONNX, kept in `~/.cache/kokoro/`).
 
 ## Layout
 
@@ -54,10 +59,17 @@ Deviations: none. No `public/characters/` images: every character is drawn in co
 - `src/toon/poses.ts` — poses, walk and run cycles.
 - `src/toon/props.tsx`, `src/toon/scenery.tsx` — props and scenery pieces.
 - `src/toon/sets.tsx` — the five layered sets with a parallax camera.
-- `src/sheets/` — the approval sheets and style frames.
+- `src/stick/Stickman.tsx`, `src/stick/stickCast.tsx` — the stickman rig and cast (current).
+- `src/sheets/StickSheets.tsx` — the stickman approval sheets (`StickMonkey`, `StickScene`, `StickCast`).
+- `src/sheets/` — the earlier cartoon sheets and style frames (rejected, kept for the sets).
 
 ## Decisions
 
+- 2026-11-25: characters are polished stickmen (round heads, small faces, thin black limbs,
+  colour only on clothing and key details); the cartoon rig in `src/toon/Figure.tsx` is retired
+  for characters. Backgrounds stay full-colour and layered. A light keyline keeps the figures
+  readable. Piper rejected as too robotic; testing Edge TTS and Kokoro for a natural British
+  narrator. Free tools only, ask before any cost.
 - 2026-11-24: new direction approved: full-colour cartoon, Ink Explainer quality as the bar, own
   artwork. Monkey design kept exactly (brown, cream face, ears, tuft, blue shirt, red tie, dark
   trousers, curling tail). Piper for the voice, never eSpeak. Free tools only. Approval of the

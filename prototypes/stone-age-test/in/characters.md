@@ -1,5 +1,13 @@
 # Characters — fixed descriptions
 
+**2026-11-25: all characters are now polished stickmen** (`src/stick/stickCast.tsx`): a simple
+round head, a small understated face (dot eyes, short brows, a small mouth), thin black stick
+arms and legs with small round hands and oval feet, one simple clothing shape, colour only on
+clothing and identifying details. The monkey keeps his identity: brown round head, cream face
+and muzzle, monkey ears, small tuft, blue shirt (short sleeves), red tie, dark trousers, a long
+curling tail. No large eyes, no bulky body. The descriptions below still give each character's
+colours and identifying details.
+
 Every character is drawn by one rig (`src/toon/Figure.tsx`) from one design record
 (`src/toon/cast.tsx`). The text below and the record must say the same thing.
 
