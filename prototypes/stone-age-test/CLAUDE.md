@@ -1,4 +1,4 @@
-<!-- router: Stone Age style test (5 scenes) — status: black-and-white stickmen sent for approval 2026-11-25; voice Edge Ryan; no test video yet -->
+<!-- router: Stone Age style test (5 scenes) — status: final look (white stickmen, coloured clothes, expressive faces) sent for approval 2026-11-25; voice Edge Ryan; no test video yet -->
 # stone-age-test — Stone Age style test: 5 scenes, full-colour cartoon, monkey presenter
 
 ## What it is
@@ -18,6 +18,10 @@ Ice Age valley, gathering berries, stone tools, campfire.
 
 ## Status
 
+- 2026-11-25: corrected direction: white stickman heads and bodies, black outlines and limbs,
+  coloured clothing; the monkey in his original colours. New expressive face system
+  (`src/stick/Face.tsx`, 18 moods). Sent `work/review-v4/`: monkey sheet, expressions sheet,
+  the sample scene in two beats, the cast. No video until approved.
 - 2026-11-25: characters made strictly black and white (monkey and cast); backgrounds unchanged.
   Updated monkey sheet and sample scene sent (`work/review-v3/`). Voice chosen: Edge Ryan.
   Next, after approval: the 30 s test at 1080p.
@@ -62,12 +66,17 @@ Deviations: none. No `public/characters/` images: every character is drawn in co
 - `src/toon/poses.ts` — poses, walk and run cycles.
 - `src/toon/props.tsx`, `src/toon/scenery.tsx` — props and scenery pieces.
 - `src/toon/sets.tsx` — the five layered sets with a parallax camera.
-- `src/stick/Stickman.tsx`, `src/stick/stickCast.tsx` — the stickman rig and cast (current).
+- `src/stick/Stickman.tsx`, `src/stick/Face.tsx`, `src/stick/stickCast.tsx` — the stickman rig, its expressive face (18 moods) and the cast (current).
 - `src/sheets/StickSheets.tsx` — the stickman approval sheets (`StickMonkey`, `StickScene`, `StickCast`).
 - `src/sheets/` — the earlier cartoon sheets and style frames (rejected, kept for the sets).
 
 ## Decisions
 
+- 2026-11-25 (supersedes the black-and-white note below): white stickman heads and bodies, black
+  outlines, features and limbs, coloured clothing. The monkey keeps his original colours (brown
+  head and tail, cream face and muzzle, dark tuft, blue shirt, red tie, black trousers).
+  Expressive faces comparable to the reference: eyes that change shape and direction, moving
+  brows, real mouth shapes. Colourful backgrounds unchanged. Voice: Edge Ryan. 1080p.
 - 2026-11-25: all characters strictly black and white: black outlines, limbs and features, white
   faces and bodies, no colour on any character (the monkey keeps his shapes: ears, muzzle, tuft,
   shirt and tie, black trousers, tail). Colourful backgrounds stay as a separate element. Voice

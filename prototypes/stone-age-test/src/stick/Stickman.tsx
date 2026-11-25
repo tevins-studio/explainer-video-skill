@@ -2,18 +2,17 @@ import React from "react";
 import type { Pose } from "../toon/poses";
 
 /** The house stickman. One rig for every character, the monkey presenter included.
- *  Round head, small understated face, thin black stick limbs, a simple clothing shape, minimal
- *  colour. Same conventions as poses.ts: degrees, 0 = hanging down, + = towards the facing side,
+ *  White round head and body, black outlines and stick limbs, an expressive face (Face.tsx),
+ *  coloured clothing. Same conventions as poses.ts: degrees, 0 = hanging down, + = towards the facing side,
  *  lower angles relative to the upper ones. Local space: facing right, origin on the ground. */
 
 export const INK = "#1f1a17";
 const LINE = 6.5; // limb weight
 const OUT = 3.5; // outline weight of heads and clothing
 
-export type Mood =
-  | "neutral" | "smile" | "talk" | "surprised" | "worried" | "sour" | "pain" | "laugh"
-  | "cheeky" | "focused" | "sleepy" | "proud" | "scared";
-export type Talk = "closed" | "open" | "wide";
+export type { Mood, Talk } from "./Face";
+import { Face } from "./Face";
+import type { Mood, Talk } from "./Face";
 
 export type StickDesign = {
   id: string;
@@ -32,6 +31,8 @@ export type StickDesign = {
   necklace?: string[];
   belt?: string;
   feet?: string;
+  tail?: string; // monkey tail colour
+  tuft?: string; // monkey tuft colour
 };
 
 type P = [number, number];
@@ -49,60 +50,6 @@ const Tube: React.FC<{ d: string; w: number; c: string }> = ({ d, w, c }) => (
     <path d={d} stroke={c} strokeWidth={w} fill="none" strokeLinecap="round" strokeLinejoin="round" />
   </>
 );
-
-// ------------------------------------------------------------------ the face: small and understated
-
-const Face: React.FC<{ mood: Mood; talk: Talk; blink: boolean; look: P; R: number; monkey?: boolean }> = ({ mood, talk, blink, look, R, monkey }) => {
-  const k = R / 44;
-  const ex = 12 * k;
-  const ey = (monkey ? -4 : -3) * k;
-  const lx = look[0] * 3 * k;
-  const ly = look[1] * 2 * k;
-  const my = (monkey ? 17 : 15) * k;
-  const s = { stroke: INK, strokeWidth: 3 * k, fill: "none", strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
-  const dot = (x: number) => <circle cx={x + lx} cy={ey + ly} r={3.6 * k} fill={INK} />;
-  const eyes = (() => {
-    if (blink || mood === "laugh" || mood === "proud") {
-      return <path d={`M ${-ex - 4 * k} ${ey} Q ${-ex} ${ey - 4 * k} ${-ex + 4 * k} ${ey} M ${ex - 4 * k} ${ey} Q ${ex} ${ey - 4 * k} ${ex + 4 * k} ${ey}`} {...s} />;
-    }
-    if (mood === "pain") return <path d={`M ${-ex - 4 * k} ${ey - 3 * k} L ${-ex + 3 * k} ${ey} L ${-ex - 4 * k} ${ey + 3 * k} M ${ex + 4 * k} ${ey - 3 * k} L ${ex - 3 * k} ${ey} L ${ex + 4 * k} ${ey + 3 * k}`} {...s} />;
-    if (mood === "sleepy") return <path d={`M ${-ex - 4 * k} ${ey + 1} L ${-ex + 4 * k} ${ey + 1} M ${ex - 4 * k} ${ey + 1} L ${ex + 4 * k} ${ey + 1}`} {...s} />;
-    if (mood === "surprised" || mood === "scared") {
-      return <>{[-ex, ex].map((x) => <g key={x}><circle cx={x} cy={ey} r={5.4 * k} fill="#fff" stroke={INK} strokeWidth={2.2 * k} /><circle cx={x + lx * 0.5} cy={ey + ly * 0.5} r={2.2 * k} fill={INK} /></g>)}</>;
-    }
-    if (mood === "sour") return <>{dot(-ex)}<path d={`M ${ex - 4 * k} ${ey} L ${ex + 4 * k} ${ey}`} {...s} /></>;
-    return <>{dot(-ex)}{dot(ex)}</>;
-  })();
-  // brows: short strokes, the main carrier of the mood
-  const brow: Record<Mood, [number, number, number]> = {
-    // [inner-end lift, outer-end lift, height]
-    neutral: [0, 0, 0], smile: [1, 1, 1], talk: [1, 0, 1], surprised: [3, 3, 4], worried: [4, -1, 2],
-    sour: [3, -1, 0], pain: [4, -1, 1], laugh: [1, 1, 2], cheeky: [0, 1, 1], focused: [-3, 0, -1],
-    sleepy: [-1, -1, -2], proud: [0, 1, 2], scared: [5, 0, 4],
-  };
-  const [bi, bo, bh] = brow[mood];
-  const by = ey - 10 * k - bh * k;
-  const brows = (
-    <path d={`M ${-ex - 6 * k} ${by - bo * k} L ${-ex + 5 * k} ${by - bi * k} M ${ex - 5 * k} ${by - (mood === "cheeky" ? 3 : bi) * k} L ${ex + 6 * k} ${by - (mood === "cheeky" ? 5 : bo) * k}`}
-      {...s} strokeWidth={2.6 * k} />
-  );
-  const open = talk === "wide" ? 1 : talk === "open" ? 0.55 : 0;
-  const mouth = (() => {
-    const w = 8 * k;
-    if (open > 0 || mood === "surprised" || mood === "scared" || mood === "laugh") {
-      const h = (mood === "laugh" ? 9 : mood === "scared" ? 8 : mood === "surprised" ? 6 : 3 + 6 * open) * k;
-      const ww = (mood === "surprised" ? 4.5 : mood === "laugh" ? 8 : 5 + 3 * open) * k;
-      return <ellipse cx={0} cy={my + h * 0.3} rx={ww} ry={h * 0.6} fill={INK} />;
-    }
-    if (mood === "smile" || mood === "proud") return <path d={`M ${-w} ${my - 2 * k} Q 0 ${my + 6 * k} ${w} ${my - 2 * k}`} {...s} />;
-    if (mood === "cheeky") return <path d={`M ${-w * 0.7} ${my} Q ${w * 0.2} ${my + 4 * k} ${w} ${my - 4 * k}`} {...s} />;
-    if (mood === "worried" || mood === "sour") return <path d={`M ${-w} ${my + 2 * k} q ${w / 2} -4 ${w} 0 t ${w} 0`} {...s} />;
-    if (mood === "pain") return <path d={`M ${-w} ${my} L ${w} ${my}`} {...s} strokeWidth={4 * k} />;
-    if (mood === "focused" || mood === "sleepy") return <path d={`M ${-w * 0.6} ${my} L ${w * 0.6} ${my}`} {...s} />;
-    return <path d={`M ${-w * 0.8} ${my - 1 * k} Q 0 ${my + 3 * k} ${w * 0.8} ${my - 1 * k}`} {...s} />;
-  })();
-  return <g>{eyes}{brows}{mouth}</g>;
-};
 
 // ------------------------------------------------------------------ the figure
 
@@ -192,7 +139,7 @@ export const Stickman: React.FC<Props> = ({
       <ellipse cx={0} cy={0} rx={(seat ? 54 : 36) * S} ry={6 * S} fill={INK} opacity={0.16} />
       <g transform={`translate(0 ${-reach})`}>
         {/* the tail is a stick like the limbs, slightly thinner */}
-        {monkey && <path d={tailD} {...stick} strokeWidth={LINE * 0.8} />}
+        {monkey && (d.tail ? <Tube d={tailD} w={5} c={d.tail} /> : <path d={tailD} {...stick} strokeWidth={LINE * 0.8} />)}
         <g transform={`rotate(${pose.lean})`}>
           {holdBehind?.(hd)}
           {arm(shF, eF, hF, "af")}
@@ -239,10 +186,10 @@ export const Stickman: React.FC<Props> = ({
                 <circle cx={3} cy={R * 0.17} r={1.9} fill={INK} />
               </g>
             )}
-            {monkey && <path d={`M ${-R * 0.18} ${-R * 0.94} Q ${-R * 0.24} ${-R * 1.3} ${-R * 0.02} ${-R * 1.1} Q ${R * 0.04} ${-R * 1.36} ${R * 0.18} ${-R * 1.06} Q ${R * 0.36} ${-R * 1.2} ${R * 0.24} ${-R * 0.92} Z`} fill={INK} {...ol} strokeWidth={2.6} />}
+            {monkey && <path d={`M ${-R * 0.18} ${-R * 0.94} Q ${-R * 0.24} ${-R * 1.3} ${-R * 0.02} ${-R * 1.1} Q ${R * 0.04} ${-R * 1.36} ${R * 0.18} ${-R * 1.06} Q ${R * 0.36} ${-R * 1.2} ${R * 0.24} ${-R * 0.92} Z`} fill={d.tuft ?? INK} {...ol} strokeWidth={2.6} />}
             {d.hair?.(R)}
             <g transform={`translate(${ht} 0)`}>
-              <Face mood={mood} talk={talk} blink={blink} look={look} R={R} monkey={monkey} />
+              <Face mood={mood} talk={talk} blink={blink} look={look} R={R} monkey={monkey} skin={monkey ? (d.face ?? d.head) : d.head} />
               {d.beard?.(R)}
             </g>
           </g>

@@ -9,7 +9,7 @@ import type { Storyboard } from "./types";
 import { MonkeyFaces, MonkeyModel } from "./sheets/MonkeySheet";
 import { CastSheet } from "./sheets/CastSheet";
 import { Frame1, Frame2, Frame3, Frame4, Frame5 } from "./sheets/StyleFrames";
-import { StickCastSheet, StickMonkeySheet, StickSampleScene } from "./sheets/StickSheets";
+import { StickCastSheet, StickFacesSheet, StickMonkeySheet, StickSampleScene, StickSampleSceneB } from "./sheets/StickSheets";
 
 /** The sample holds the first beats, so a check render costs seconds, not minutes. */
 const SAMPLE = (storyboard as Storyboard).beats.slice(0, 4).map((b) => b.id);
@@ -30,6 +30,8 @@ export const Root: React.FC = () => (
     ))}
     <Composition id="StickMonkey" component={StickMonkeySheet} width={1920} height={1080} fps={FPS} durationInFrames={90} />
     <Composition id="StickScene" component={StickSampleScene} width={1920} height={1080} fps={FPS} durationInFrames={90} />
+    <Composition id="StickSceneB" component={StickSampleSceneB} width={1920} height={1080} fps={FPS} durationInFrames={90} />
+    <Composition id="StickFaces" component={StickFacesSheet} width={1920} height={1080} fps={FPS} durationInFrames={1} />
     <Composition id="StickCast" component={StickCastSheet} width={1920} height={1080} fps={FPS} durationInFrames={1} />
     <Composition id="SheetFaces" component={MonkeyFaces} width={1920} height={1080} fps={FPS} durationInFrames={1} />
     {SAMPLE.length > 0 && (

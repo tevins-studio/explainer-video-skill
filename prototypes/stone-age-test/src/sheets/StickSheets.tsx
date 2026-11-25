@@ -14,19 +14,19 @@ export const StickMonkeySheet: React.FC = () => {
   const tail = 6 * Math.sin(f * 0.1);
   const moods: Mood[] = ["neutral", "smile", "talk", "surprised", "cheeky", "worried", "sour", "pain", "laugh", "focused"];
   return (
-    <SheetBg title="Monkey presenter — stickman version" sub="Black and white · round monkey head · ears · muzzle · tuft · shirt and tie shapes · dark trousers · thin stick limbs · curling tail">
+    <SheetBg title="Monkey presenter — stickman version" sub="Brown monkey head · cream face and muzzle · ears · tuft · blue shirt · red tie · black trousers · thin black stick limbs · curling tail">
       <KeylineDefs />
-      <Stickman d={M} x={250} y={700} scale={1.55} pose={WAVE} mood="smile" turn={0.2} tail={tail} />
+      <Stickman d={M} x={250} y={700} scale={1.55} pose={WAVE} mood="happy" talk="open" turn={0.2} tail={tail} />
       <Label x={250} y={750} t="presenter" />
       {[
         { p: STAND, m: "neutral" as Mood, l: "front", t: 0 },
         { p: walk(f * 0.22 + 0.6), m: "talk" as Mood, l: "walk", t: 0.6 },
-        { p: run(f * 0.38 + 1), m: "surprised" as Mood, l: "run", t: 0.6 },
+        { p: run(f * 0.38 + 1), m: "scared" as Mood, l: "run", t: 0.6 },
         { p: POINT, m: "cheeky" as Mood, l: "point", t: 0.6 },
         { p: HOLD_UP, m: "proud" as Mood, l: "hold up", t: 0.2, hold: true },
-        { p: SHRUG, m: "worried" as Mood, l: "shrug", t: 0 },
-        { p: CHEER, m: "laugh" as Mood, l: "cheer", t: 0 },
-        { p: THINK, m: "focused" as Mood, l: "think", t: 0.3 },
+        { p: SHRUG, m: "confused" as Mood, l: "shrug", t: 0 },
+        { p: CHEER, m: "excited" as Mood, l: "cheer", t: 0 },
+        { p: THINK, m: "curious" as Mood, l: "think", t: 0.3 },
         { p: SIT, m: "smile" as Mood, l: "sit", t: 0.3, seat: 60 },
       ].map((o, i) => {
         const x = 590 + (i % 5) * 290;
@@ -39,23 +39,17 @@ export const StickMonkeySheet: React.FC = () => {
           </g>
         );
       })}
-      <text x={60} y={840} fontFamily="'Noto Sans','DejaVu Sans',sans-serif" fontWeight={700} fontSize={22} fill="#7a6a55">small, understated faces</text>
-      {moods.map((m, i) => (
-        <g key={m}>
-          <svg x={56 + (i % 5) * 84} y={858 + Math.floor(i / 5) * 104} width={84} height={84} viewBox="-60 -330 120 120">
-            <Stickman d={M} x={0} y={0} pose={STAND} mood={m} talk={m === "talk" ? "open" : "closed"} turn={0} />
-          </svg>
-          <text x={98 + (i % 5) * 84} y={952 + Math.floor(i / 5) * 104} textAnchor="middle" fontFamily="'Noto Sans','DejaVu Sans',sans-serif" fontSize={14} fill="#7a6a55">{m}</text>
-        </g>
-      ))}
+      <text x={60} y={860} fontFamily="'Noto Sans','DejaVu Sans',sans-serif" fontWeight={700} fontSize={22} fill="#7a6a55">expressions: see the expressions sheet</text>
     </SheetBg>
   );
 };
 
-/** The sample scene: gathering berries. Ama picks, Tuk tastes a sour one, the monkey tries one. */
-export const StickSampleScene: React.FC = () => {
+/** The sample scene, two beats. A: Ama picks, Tuk has just tasted a sour berry, the monkey eyes
+ *  his own berry. B: a moment later the monkey has tried it; Tuk and Ama laugh at his face. */
+const BerryScene: React.FC<{ beat: "a" | "b" }> = ({ beat }) => {
   const f = useCurrentFrame();
   const cam = { x: 20, y: 150, z: 1.5 };
+  const a = beat === "a";
   return (
     <AbsoluteFill>
       <MeadowSet f={f} picked={3} cam={cam} mid={
@@ -64,11 +58,17 @@ export const StickSampleScene: React.FC = () => {
           <Layer cam={cam} depth={1}>
             <g filter="url(#keyline)">
               <Basket x={700} y={968} s={0.75} berries={7} />
-              <Stickman d={AMA_STICK} x={590} y={960} pose={tweak(REACH, { ra: [92, -10], la: [30, 40], lean: 7, tilt: 8, ll: [-10, 0], rl: [14, 0] })} face={-1} mood="smile" look={[-1, 0.3]} turn={-0.5} />
-              <Stickman d={TUK_STICK} x={880} y={972} pose={tweak(STAND, { ra: [12, -160], la: [-40, 30], tilt: -10 })} mood="sour" turn={-0.4} look={[-1, 0]}
-                hold={(h) => <Berry x={h.near[0]} y={h.near[1] + 4} r={8} />} />
-              <Stickman d={M} x={1130} y={968} pose={tweak(STAND, { ra: [40, 110], la: [-14, 12], tilt: 8 })} face={-1} mood="cheeky" look={[0.2, -0.8]} turn={0.1} tail={6 * Math.sin(f * 0.1)}
-                hold={(h) => <Berry x={h.near[0]} y={h.near[1] - 12} r={10} />} />
+              <Stickman d={AMA_STICK} x={590} y={960}
+                pose={a ? tweak(REACH, { ra: [92, -10], la: [30, 40], lean: 7, tilt: 8, ll: [-10, 0], rl: [14, 0] }) : tweak(STAND, { ra: [40, 100], la: [-20, 30], lean: -4, tilt: -10 })}
+                face={-1} mood={a ? "happy" : "laugh"} look={a ? [-1, 0.3] : [-1, 0]} turn={-0.5} />
+              <Stickman d={TUK_STICK} x={880} y={972}
+                pose={a ? tweak(STAND, { ra: [12, -160], la: [-40, 30], tilt: -10 }) : tweak(STAND, { ra: [60, 100], la: [-60, -100], lean: -6, tilt: 12 })}
+                mood={a ? "disgust" : "laugh"} turn={a ? -0.4 : 0.5} look={a ? [-1, 0] : [1, 0]}
+                hold={a ? (h) => <Berry x={h.near[0]} y={h.near[1] + 4} r={8} /> : undefined} />
+              <Stickman d={M} x={1130} y={968}
+                pose={a ? tweak(STAND, { ra: [40, 110], la: [-14, 12], tilt: 8 }) : tweak(STAND, { ra: [30, 140], la: [-40, -30], lean: -8, tilt: -14 })}
+                face={-1} mood={a ? "curious" : "disgust"} look={a ? [0.6, -0.9] : [0, 0]} turn={a ? 0.2 : 0} tail={a ? 6 * Math.sin(f * 0.1) : 2}
+                hold={a ? (h) => <Berry x={h.near[0]} y={h.near[1] - 12} r={10} /> : undefined} />
             </g>
           </Layer>
         </g>
@@ -76,10 +76,30 @@ export const StickSampleScene: React.FC = () => {
     </AbsoluteFill>
   );
 };
+export const StickSampleScene: React.FC = () => <BerryScene beat="a" />;
+export const StickSampleSceneB: React.FC = () => <BerryScene beat="b" />;
+
+/** The monkey's expression range, large enough to judge, plus the same face system on a person. */
+export const StickFacesSheet: React.FC = () => {
+  const moods: Mood[] = ["neutral", "happy", "excited", "laugh", "cheeky", "curious", "surprised", "shock", "scared", "confused", "worried", "sad", "angry", "disgust", "pain", "focused", "sleepy", "proud"];
+  const cell = (d: typeof M, m: Mood, x: number, y: number, size: number, talk: "closed" | "open" = "closed") => (
+    <g key={`${d.id}${m}${x}`}>
+      <svg x={x - size / 2} y={y - size / 2} width={size} height={size} viewBox="-72 -352 144 144">
+        <Stickman d={d} x={0} y={0} pose={STAND} mood={m} talk={talk} turn={0} look={m === "curious" || m === "cheeky" ? [0.7, -0.3] : [0, 0]} />
+      </svg>
+      <text x={x} y={y + size / 2 + 6} textAnchor="middle" fontFamily="'Noto Sans','DejaVu Sans',sans-serif" fontWeight={700} fontSize={20} fill="#7a6a55">{m}</text>
+    </g>
+  );
+  return (
+    <SheetBg title="Expressions — the monkey presenter" sub="Eyes change shape and direction · brows move · real mouth shapes · talking opens the mouth of any mood">
+      {moods.map((m, i) => cell(M, m, 150 + (i % 6) * 300, 250 + Math.floor(i / 6) * 270, 200))}
+    </SheetBg>
+  );
+};
 
 /** The rest of the stick cast at true scale, for reference next to the scene. */
 export const StickCastSheet: React.FC = () => (
-  <SheetBg title="Stick cast — black and white, same rig" sub="Ama · Tuk · Oru · Nana, next to the presenter">
+  <SheetBg title="Stick cast — white stickmen, coloured clothing, same rig" sub="Ama · Tuk · Oru · Nana, next to the presenter">
     {[
       { d: M, x: 260, p: POINT, m: "cheeky" as Mood },
       { d: AMA_STICK, x: 600, p: tweak(STAND, { ra: [60, 40] }), m: "smile" as Mood },
