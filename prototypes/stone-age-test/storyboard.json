@@ -1,5 +1,92 @@
 {
  "gap_s": 0.4,
- "voices": {},
- "beats": []
+ "voices": {
+  "narrator": {
+   "voice_id": "en-GB-RyanNeural"
+  }
+ },
+ "beats": [
+  {
+   "id": "s1",
+   "start": 12,
+   "speaker": "narrator",
+   "line": "Hi! I'm your guide. Let's travel back eleven thousand years.",
+   "scene": "Museum hall. The monkey pops up into a close-up, waves, talks to camera, gets excited; a time vortex swallows the frame.",
+   "shot": "close-up",
+   "camera": "slow push in, shake on the vortex",
+   "voice_key": "f45e659525f4",
+   "voice_file": "assets/voice-norm/s1.wav",
+   "voice_s": 4.46,
+   "frames": 134,
+   "gain_db": -2.4,
+   "start_frame": 0,
+   "start_s": 0.0
+  },
+  {
+   "id": "s2",
+   "start": 180,
+   "speaker": "narrator",
+   "line": "The Ice Age is ending. Glaciers are melting, and mammoths roam the land.",
+   "scene": "The monkey drops out of the sky onto a snowbank, shivers, looks at the melting glacier, then a mammoth herd walks in and trumpets.",
+   "shot": "wide",
+   "camera": "pan from the glacier to the herd, push in",
+   "voice_key": "47cbb7201941",
+   "voice_file": "assets/voice-norm/s2.wav",
+   "voice_s": 4.47,
+   "frames": 135,
+   "gain_db": -1.9,
+   "start_frame": 201,
+   "start_s": 6.7
+  },
+  {
+   "id": "s3",
+   "start": 344,
+   "speaker": "narrator",
+   "line": "People gathered berries and roots. Most were tasty. Some... not so much!",
+   "scene": "Ama picks berries, Tuk eats one happily. The monkey eats one, loves it; eats a second: disgust. Ama and Tuk laugh.",
+   "shot": "medium",
+   "camera": "slow push in on the monkey for the gag",
+   "voice_key": "24dde81ba758",
+   "voice_file": "assets/voice-norm/s3.wav",
+   "voice_s": 4.96,
+   "frames": 149,
+   "gain_db": -2.4,
+   "start_frame": 388,
+   "start_s": 12.933
+  },
+  {
+   "id": "s4",
+   "start": 546,
+   "speaker": "narrator",
+   "line": "Toolmakers chipped flint into razor-sharp blades. It takes practice. Ouch!",
+   "scene": "Oru knaps flint, flakes fly. The monkey tries, hits his thumb. Oru laughs and holds up a finished blade.",
+   "shot": "medium close",
+   "camera": "push in on the strike",
+   "voice_key": "878f81cc4cbb",
+   "voice_file": "assets/voice-norm/s4.wav",
+   "voice_s": 5.32,
+   "frames": 160,
+   "gain_db": -3.1,
+   "start_frame": 605,
+   "start_s": 20.167
+  },
+  {
+   "id": "s5",
+   "start": 742,
+   "speaker": "narrator",
+   "line": "At night, families gathered round the fire, to share food and stories.",
+   "scene": "Night camp. Nana tells a story with a shadow mammoth on the rock wall; Tuk is amazed; the monkey yawns by the fire. Camera rises to the stars, title.",
+   "shot": "medium wide",
+   "camera": "slow pull back and tilt up to the stars",
+   "voice_key": "01e1eb961a0b",
+   "voice_file": "assets/voice-norm/s5.wav",
+   "voice_s": 4.08,
+   "frames": 123,
+   "gain_db": -3.4,
+   "start_frame": 832,
+   "start_s": 27.733
+  }
+ ],
+ "total_s": 33.07,
+ "voice_model": "edge-tts"
 }

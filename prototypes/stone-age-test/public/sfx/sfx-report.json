@@ -1,0 +1,122 @@
+{
+ "vortex": {
+  "source": "library",
+  "library_key": "6f6406e7d438",
+  "prompt": "time vortex: rising magical whoosh",
+  "seed": 42,
+  "seconds": 1.2,
+  "crest_db": 12.1,
+  "active_rms_db": -30.0,
+  "peak_db": -18.7
+ },
+ "whip": {
+  "source": "library",
+  "library_key": "7f8483271733",
+  "prompt": "fast whip pan whoosh",
+  "seed": 7,
+  "seconds": 0.4,
+  "crest_db": 16.9,
+  "active_rms_db": -30.0,
+  "peak_db": -15.2
+ },
+ "thud": {
+  "source": "library",
+  "library_key": "5c618776b353",
+  "prompt": "soft thud: landing in snow",
+  "seed": 7,
+  "seconds": 0.4,
+  "crest_db": 14.8,
+  "active_rms_db": -30.0,
+  "peak_db": -13.9
+ },
+ "drip": {
+  "source": "library",
+  "library_key": "1206e8ac376d",
+  "prompt": "two water drips from melting ice",
+  "seed": 7,
+  "seconds": 0.6,
+  "crest_db": 15.4,
+  "active_rms_db": -30.0,
+  "peak_db": -15.7
+ },
+ "trumpet": {
+  "source": "generated",
+  "library_key": "52810ce5c7b8",
+  "prompt": "mammoth trumpet call",
+  "seed": 7,
+  "seconds": 1.3,
+  "crest_db": 14.2,
+  "active_rms_db": -30.0,
+  "peak_db": -15.0
+ },
+ "munch": {
+  "source": "generated",
+  "library_key": "99c49c24227a",
+  "prompt": "crunchy munch: eating berries",
+  "seed": 7,
+  "seconds": 0.6,
+  "crest_db": 19.4,
+  "active_rms_db": -30.0,
+  "peak_db": -11.3
+ },
+ "pop": {
+  "source": "generated",
+  "library_key": "ad9fda892007",
+  "prompt": "soft pop: a berry picked",
+  "seed": 7,
+  "seconds": 0.25,
+  "crest_db": 15.5,
+  "active_rms_db": -30.0,
+  "peak_db": -12.9
+ },
+ "knock": {
+  "source": "generated",
+  "library_key": "33a9408b85bf",
+  "prompt": "stone knock: flint struck on flint",
+  "seed": 7,
+  "seconds": 0.3,
+  "crest_db": 19.6,
+  "active_rms_db": -30.0,
+  "peak_db": -9.2
+ },
+ "bonk": {
+  "source": "generated",
+  "library_key": "1eb362e50e8e",
+  "prompt": "cartoon bonk: hitting a thumb",
+  "seed": 7,
+  "seconds": 0.6,
+  "crest_db": 12.2,
+  "active_rms_db": -30.0,
+  "peak_db": -16.6
+ },
+ "sparkle": {
+  "source": "generated",
+  "library_key": "2ed25c96507a",
+  "prompt": "sparkle chime: a sharp new blade",
+  "seed": 7,
+  "seconds": 0.8,
+  "crest_db": 12.6,
+  "active_rms_db": -30.0,
+  "peak_db": -18.9
+ },
+ "crackle": {
+  "source": "generated",
+  "library_key": "6edbfba7442e",
+  "prompt": "campfire crackle",
+  "seed": 7,
+  "seconds": 3.0,
+  "crest_db": 28.0,
+  "active_rms_db": -30.0,
+  "peak_db": -3.9
+ },
+ "crickets": {
+  "source": "generated",
+  "library_key": "e2d2dab8bd32",
+  "prompt": "night crickets",
+  "seed": 7,
+  "seconds": 3.0,
+  "crest_db": 17.0,
+  "active_rms_db": -30.0,
+  "peak_db": -18.2
+ }
+}

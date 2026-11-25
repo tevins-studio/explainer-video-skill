@@ -6,6 +6,7 @@ import { FPS } from "./motion";
 import storyboard from "../storyboard.json";
 
 import type { Storyboard } from "./types";
+import { TOTAL, Test30 } from "./test30/Test30";
 import { MonkeyFaces, MonkeyModel } from "./sheets/MonkeySheet";
 import { CastSheet } from "./sheets/CastSheet";
 import { Frame1, Frame2, Frame3, Frame4, Frame5 } from "./sheets/StyleFrames";
@@ -22,6 +23,8 @@ export const Root: React.FC = () => (
     {/* Body = the same video without the frame, for the audio check and quick iterations */}
     <Composition id="Body" component={Body} width={1920} height={1080} fps={FPS}
       durationInFrames={layout().total} defaultProps={{ ids: undefined }} />
+    {/* the approved 30 s style test, 1080p */}
+    <Composition id="Test30" component={Test30} width={1920} height={1080} fps={FPS} durationInFrames={TOTAL} />
     {/* design sheets for approval (stills; a few seconds so the cycles can be previewed) */}
     <Composition id="SheetMonkey" component={MonkeyModel} width={1920} height={1080} fps={FPS} durationInFrames={90} />
     <Composition id="SheetCast" component={CastSheet} width={1920} height={1080} fps={FPS} durationInFrames={90} />

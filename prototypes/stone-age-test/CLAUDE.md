@@ -1,4 +1,4 @@
-<!-- router: Stone Age style test (5 scenes) — status: final look (white stickmen, coloured clothes, expressive faces) sent for approval 2026-11-25; voice Edge Ryan; no test video yet -->
+<!-- router: Stone Age style test — 30 s test rendered 2026-11-25: out/stone-age-test-30s.mp4 (1080p, Edge Ryan); waiting on the user's review before the full documentary -->
 # stone-age-test — Stone Age style test: 5 scenes, full-colour cartoon, monkey presenter
 
 ## What it is
@@ -14,10 +14,13 @@ Ice Age valley, gathering berries, stone tools, campfire.
 |---|---|---|
 | `SheetMonkey`, `SheetFaces`, `SheetCast` | — | design sheets → `work/review/` |
 | `Style1` … `Style5` | — | style frames → `work/review/` |
-| `Full` | `storyboard.json` | `out/stone-age-test-full.mp4` (after approval) |
+| `Test30` | `storyboard.json` (5 beats, absolute `start`) | `out/stone-age-test-30s.mp4` — the 30 s test, 1080p |
 
 ## Status
 
+- 2026-11-25: 30 s test rendered, `out/stone-age-test-30s.mp4` (1920×1080, 30 fps, 900 frames).
+  Edge Ryan narration, offline music and effects. `check-audio.py` passes on the mix and the
+  mp4; `edge-scan.py` 0 runs; every cut checked frame by frame. Waiting on the user's review.
 - 2026-11-25: corrected direction: white stickman heads and bodies, black outlines and limbs,
   coloured clothing; the monkey in his original colours. New expressive face system
   (`src/stick/Face.tsx`, 18 moods). Sent `work/review-v4/`: monkey sheet, expressions sheet,
@@ -43,6 +46,25 @@ npx remotion still src/index.ts Style2 work/stills/style2.png --frame=20
 npx remotion render src/index.ts SheetMonkey work/review/5-monkey-motion.mp4
 ```
 
+The 30 s test, from scratch (free tools only):
+
+```bash
+export GEN_SPEECH="python3 $PWD/scripts/speak-edge.py" GEN_SFX="python3 $PWD/scripts/sfx-offline.py" EDGE_RATE="+2%"
+python3 scripts/regen-voices.py edge-tts        # Edge Ryan; only changed lines are re-spoken
+python3 scripts/level-voices.py
+python3 scripts/tighten-pauses.py               # trims long pauses, writes src/cues.json
+node scripts/gen-envelopes.mjs
+python3 scripts/gen-sfx-set.py                  # sfx.json, synthesised offline
+python3 scripts/make-music.py assets/music/score.wav
+ffmpeg -y -i assets/music/score.wav -af "acompressor=threshold=-18dB:ratio=3:attack=5:release=80,alimiter=limit=0.7" -b:a 192k public/music.mp3
+npx remotion render src/index.ts Test30 work/mix/mix.wav && python3 scripts/check-audio.py work/mix/mix.wav
+npx remotion render src/index.ts Test30 out/stone-age-test-30s.mp4
+python3 scripts/check-audio.py out/stone-age-test-30s.mp4 && python3 scripts/edge-scan.py out/stone-age-test-30s.mp4
+```
+
+Scene slots (frames): s1 0–156, s2 156–336, s3 336–534, s4 534–726, s5 726–900. Each line's
+absolute `start` is in `storyboard.json`; actions key to the phrase cues in `src/cues.json`.
+
 Add `--browser-executable=<local chrome-headless-shell>` if Remotion cannot download its Chrome.
 
 Voices: Edge TTS (`pip install edge-tts`; host speech.platform.bing.com; pass the HTTPS proxy to
@@ -67,6 +89,7 @@ Deviations: none. No `public/characters/` images: every character is drawn in co
 - `src/toon/props.tsx`, `src/toon/scenery.tsx` — props and scenery pieces.
 - `src/toon/sets.tsx` — the five layered sets with a parallax camera.
 - `src/stick/Stickman.tsx`, `src/stick/Face.tsx`, `src/stick/stickCast.tsx` — the stickman rig, its expressive face (18 moods) and the cast (current).
+- `src/test30/Test30.tsx` — the 30 s test: five scenes, transitions, captions, music ducking, effect cues.
 - `src/sheets/StickSheets.tsx` — the stickman approval sheets (`StickMonkey`, `StickScene`, `StickCast`).
 - `src/sheets/` — the earlier cartoon sheets and style frames (rejected, kept for the sets).
 

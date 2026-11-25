@@ -101,7 +101,7 @@ export const MuseumSet: React.FC<{ f: number; cam?: Cam; front?: React.ReactNode
 
 // ------------------------------------------------------------------------------------------ 2
 /** The Ice Age valley: a glacier, its meltwater river, a mammoth herd on the tundra. */
-export const IceValleySet: React.FC<{ f: number; cam?: Cam; mid?: React.ReactNode; front?: React.ReactNode; herdX?: number }> = ({ f, cam = CAM0, mid, front, herdX = 0 }) => (
+export const IceValleySet: React.FC<{ f: number; cam?: Cam; mid?: React.ReactNode; front?: React.ReactNode; herdX?: number; trunk?: number }> = ({ f, cam = CAM0, mid, front, herdX = 0, trunk }) => (
   <svg width={1920} height={1080} viewBox="0 0 1920 1080" style={{ position: "absolute", inset: 0 }}>
     <Layer cam={cam} depth={0}>
       <Sky id="iceSky" top="#79b4e3" bottom="#e7f2f6" h={700} />
@@ -146,7 +146,7 @@ export const IceValleySet: React.FC<{ f: number; cam?: Cam; mid?: React.ReactNod
       <Hill d="M 1180 1200 Q 1240 820 1700 770 Q 2400 760 3000 800 L 3000 1200 Z" fill={NATURE.grass} line="#6f8f3e" w={4} />
       {[[-60, 830], [190, 800], [1500, 800], [1760, 790]].map(([x, y], i) => <Pine key={i} x={x} y={y} s={0.75} snow={i % 2 === 0} />)}
       <g transform={`translate(${herdX * 1.4} 0)`}>
-        <Mammoth x={1580} y={860} s={0.5} walk={f * 0.12 + 0.5} trunk={10 * Math.sin(f * 0.05)} />
+        <Mammoth x={1580} y={860} s={0.5} walk={f * 0.12 + 0.5} trunk={trunk ?? 10 * Math.sin(f * 0.05)} />
       </g>
     </Layer>
     <Layer cam={cam} depth={1.0}>
